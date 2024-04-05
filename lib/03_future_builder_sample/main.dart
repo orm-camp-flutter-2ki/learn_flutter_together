@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:learn_flutter_together/02_future_set_state_sample/future_set_state.dart';
 import 'package:learn_flutter_together/03_future_builder_sample/future_builder_sample.dart';
 
+import '../00_common_data/repository/todo_repository.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -18,7 +20,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const FutureBuilderSample(),
+      home: FutureBuilderSample(
+        todoRepository: TodoRepositoryImpl(),
+      ),
     );
   }
 }
