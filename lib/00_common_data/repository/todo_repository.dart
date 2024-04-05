@@ -17,5 +17,8 @@ class TodoRepositoryImpl implements TodoRepository {
   }
 
   @override
-  Future<List<Todo>> getTodos() => _api.getTodos();
+  Future<List<Todo>> getTodos() async {
+    await Future.delayed(const Duration(seconds: 2));
+    return _api.getTodos();
+  }
 }
