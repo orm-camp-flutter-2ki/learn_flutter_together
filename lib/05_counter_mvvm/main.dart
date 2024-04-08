@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:learn_flutter_together/05_counter_mvvm/main_view_model.dart';
-import 'package:learn_flutter_together/05_counter_mvvm/repository/counter_repository.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,10 +34,22 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final viewModel = MainViewModel();
 
+  void updateUI() => setState(() {});
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel.addListener(updateUI);
+  }
+
+  @override
+  void dispose() {
+    viewModel.removeListener(updateUI);
+    super.dispose();
+  }
+
   void _incrementCounter() {
-    setState(() {
-      viewModel.incrementCounter();
-    });
+    viewModel.incrementCounter();
   }
 
   @override
@@ -60,19 +71,11 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  viewModel.reset();
-                });
-              },
+              onPressed: () => viewModel.reset(),
               child: const Text('reset'),
             ),
             ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  viewModel.x2();
-                });
-              },
+              onPressed: () => viewModel.x2(),
               child: const Text('X 2'),
             ),
           ],
