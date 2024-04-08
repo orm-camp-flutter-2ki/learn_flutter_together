@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:learn_flutter_together/00_common_data/model/photo.dart';
+import 'package:learn_flutter_together/00_common_data/repository/photo_repository.dart';
 
 class PhotoListScreen extends StatelessWidget {
-  const PhotoListScreen({super.key});
+  final int albumId;
+  final PhotoRepository photoRepository;
+
+  const PhotoListScreen({
+    super.key,
+    required this.albumId,
+    required this.photoRepository,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -9,11 +18,22 @@ class PhotoListScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Photo List'),
       ),
-      body: ElevatedButton(
-        onPressed: () async {
-          Navigator.pop(context, true);
+      body: FutureBuilder<List<Photo>>(
+        future: photoRepository.getPhotos(albumId),
+        builder: (BuildContext context, AsyncSnapshot<List<Photo>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          final photos = snapshot.data ?? [];
+
+          return GridView.count(
+            crossAxisCount: 2,
+            children: photos.map((e) => Image.network(e.thumbnailUrl)).toList(),
+          );
         },
-        child: Text('이전'),
       ),
     );
   }
