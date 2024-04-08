@@ -21,13 +21,9 @@ class PhotoDetailScreen extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(30.0),
-              child: Container(
-                alignment: Alignment.center,
-                color: Colors.green,
-                child: Image.network(photo.url),
-              ),
+            Hero(
+              tag: photo.id,
+              child: Image.network(photo.url),
             ),
             const SizedBox(height: 40),
             Text(photo.toString()),
