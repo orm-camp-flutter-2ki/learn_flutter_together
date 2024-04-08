@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:learn_flutter_together/00_common_data/model/photo.dart';
 import 'package:learn_flutter_together/00_common_data/repository/photo_repository.dart';
 
@@ -31,7 +32,21 @@ class PhotoListScreen extends StatelessWidget {
 
           return GridView.count(
             crossAxisCount: 2,
-            children: photos.map((e) => Image.network(e.thumbnailUrl)).toList(),
+            children: photos
+                .map(
+                  (photo) => GestureDetector(
+                    onTap: () {
+                      context.push('/photo_detail', extra: photo);
+                    },
+                    child: Image.network(
+                      photo.thumbnailUrl,
+                      errorBuilder: (context, error, stackTrace) {
+                        return const Placeholder();
+                      },
+                    ),
+                  ),
+                )
+                .toList(),
           );
         },
       ),

@@ -63,7 +63,7 @@ class _AlbumListScreenState extends State<AlbumListScreen> {
                   queryParameters: {'albumId': album.id.toString()},
                 ).toString());
               },
-              title: Text(album.title),
+              title: Text('${album.id}: ${album.title}'),
             );
           },
         ).toList(),

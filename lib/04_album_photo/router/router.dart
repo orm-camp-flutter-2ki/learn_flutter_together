@@ -3,7 +3,10 @@ import 'package:learn_flutter_together/00_common_data/data_source/json_place_hol
 import 'package:learn_flutter_together/00_common_data/repository/album_repository.dart';
 import 'package:learn_flutter_together/00_common_data/repository/photo_repository.dart';
 import 'package:learn_flutter_together/04_album_photo/presentation/album_list/album_list_screen.dart';
+import 'package:learn_flutter_together/04_album_photo/presentation/photo_detail/photo_detail_screen.dart';
 import 'package:learn_flutter_together/04_album_photo/presentation/photo_list/photo_list_screen.dart';
+
+import '../../00_common_data/model/photo.dart';
 
 // GoRouter configuration
 final router = GoRouter(
@@ -26,6 +29,13 @@ final router = GoRouter(
           albumId: albumId,
           photoRepository: PhotoRepositoryImpl(),
         );
+      },
+    ),
+    GoRoute(
+      path: '/photo_detail',
+      builder: (context, state) {
+        final photo = state.extra as Photo;
+        return PhotoDetailScreen(photo: photo);
       },
     ),
   ],
