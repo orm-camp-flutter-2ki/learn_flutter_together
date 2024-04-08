@@ -6,6 +6,8 @@ class MainViewModel {
 
   int get counter => _repository.counter;
 
+  String get bossCounter => '⭐️$counter👍';
+
   void incrementCounter() {
     _repository.counter++;
   }
