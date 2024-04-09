@@ -126,10 +126,10 @@ class Address {
       : street = json["street"],
         suite = json["suite"],
         city = json["city"],
-        zipCode = json["zipCode"];
+        zipCode = json["zipcode"];
 
   Map<String, dynamic> toJson() =>
-      {"street": street, "suite": suite, "city": city, "zipCode": zipCode};
+      {"street": street, "suite": suite, "city": city, "zipcode": zipCode};
 
   Address copyWith() {
     return Address(street, suite, city, zipCode);

@@ -60,7 +60,7 @@ class JsonPlaceHolderApi {
   }
 
   Future<List<User>> getUsers() async {
-    final response = await _client.get(Uri.parse('$_baseUrl/todos'));
+    final response = await _client.get(Uri.parse('$_baseUrl/users'));
 
     final jsonList = jsonDecode(response.body) as List;
 
