@@ -1,19 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:learn_flutter_together/05_counter_mvvm/main_view_model.dart';
-import 'package:learn_flutter_together/05_counter_mvvm/repository/counter_repository.dart';
-import 'package:learn_flutter_together/07_counter_inherited_widget/core/change_notifier_provider.dart';
-import 'package:learn_flutter_together/07_counter_inherited_widget/presentation/counter_screen.dart';
-import 'package:learn_flutter_together/07_counter_inherited_widget/presentation/counter_view_model.dart';
+import 'package:learn_flutter_together/07_counter_inherited_widget/router/router.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      value: CounterViewModel(
-        repository: CounterRepository(),
-      ),
-      child: const MyApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -22,13 +11,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const CounterScreen(),
     );
   }
 }

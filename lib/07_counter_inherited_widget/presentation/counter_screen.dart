@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:learn_flutter_together/05_counter_mvvm/repository/counter_repository.dart';
 import 'package:learn_flutter_together/07_counter_inherited_widget/core/change_notifier_provider.dart';
 
@@ -63,14 +64,7 @@ class _CounterScreenState extends State<CounterScreen> {
               child: const Text('X 2'),
             ),
             ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) {
-                    return const NextScreen();
-                  }),
-                );
-              },
+              onPressed: () => context.push('/next'),
               child: const Text('Next Screen'),
             ),
           ],
