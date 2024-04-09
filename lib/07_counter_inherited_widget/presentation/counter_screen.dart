@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:learn_flutter_together/07_counter_inherited_widget/core/change_notifier_provider.dart';
 
 import 'counter_view_model.dart';
 
 class CounterScreen extends StatefulWidget {
-  final CounterViewModel viewModel;
-
-  const CounterScreen({
-    super.key,
-    required this.viewModel,
-  });
+  const CounterScreen({super.key});
 
   @override
   State<CounterScreen> createState() => _CounterScreenState();
 }
 
 class _CounterScreenState extends State<CounterScreen> {
+  CounterViewModel get viewModel =>
+      ChangeNotifierProvider.of<CounterViewModel>(context).value;
+
   void updateUI() => setState(() {});
 
-  CounterViewModel get viewModel => widget.viewModel;
-
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     viewModel.addListener(updateUI);
   }
 
@@ -37,6 +34,9 @@ class _CounterScreenState extends State<CounterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print('build');
+    final viewModel =
+        ChangeNotifierProvider.of<CounterViewModel>(context).value;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
