@@ -16,6 +16,8 @@ class TodoMainScreen extends StatefulWidget {
 class _TodoMainScreenState extends State<TodoMainScreen> {
   void updateUI() => setState(() {});
 
+  final _nameTextEditingController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -26,6 +28,7 @@ class _TodoMainScreenState extends State<TodoMainScreen> {
   @override
   void dispose() {
     widget.todoMainViewModel.removeListener(updateUI);
+    _nameTextEditingController.dispose();
     super.dispose();
   }
 
@@ -52,6 +55,19 @@ class _TodoMainScreenState extends State<TodoMainScreen> {
       ),
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              onChanged: (value) {
+                viewModel.onSearchName(value);
+              },
+              controller: _nameTextEditingController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: '이름 검색',
+              ),
+            ),
+          ),
           Expanded(
             child: viewModel.isUsersLoading
                 ? const Center(child: CircularProgressIndicator())

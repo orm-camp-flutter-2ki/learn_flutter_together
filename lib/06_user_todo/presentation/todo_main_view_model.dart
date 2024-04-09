@@ -19,13 +19,17 @@ class TodoMainViewModel with ChangeNotifier {
 
   List<User> _users = [];
 
-  List<User> get users => List.unmodifiable(_users);
+  List<User> _filteredUsers = [];
+
+  List<User> get users => List.unmodifiable(_filteredUsers);
 
   bool _isUsersLoading = false;
 
   List<Todo> _todos = [];
 
-  List<Todo> get todos => List.unmodifiable(_todos);
+  List<Todo> _filteredTodos = [];
+
+  List<Todo> get todos => List.unmodifiable(_filteredTodos);
 
   bool _isTodosLoading = false;
 
@@ -38,6 +42,7 @@ class TodoMainViewModel with ChangeNotifier {
     notifyListeners();
 
     _users = await _userRepository.getUsers();
+    _filteredUsers = _users;
     _isUsersLoading = false;
     notifyListeners();
   }
@@ -48,17 +53,26 @@ class TodoMainViewModel with ChangeNotifier {
 
     final todos = await _todoRepository.getTodos();
     _todos = todos.where((todo) => todo.userId == user.id).toList();
+    _filteredTodos = _todos;
     _isTodosLoading = false;
     notifyListeners();
   }
 
   void onClickFinish() {
-    _todos = _todos.where((e) => e.completed).toList();
+    _filteredTodos = _todos.where((e) => e.completed).toList();
     notifyListeners();
   }
 
   void onClickUnfinished() {
-    _todos = _todos.where((e) => !e.completed).toList();
+    _filteredTodos = _todos.where((e) => !e.completed).toList();
+    notifyListeners();
+  }
+
+  void onSearchName(String name) {
+    _filteredUsers = _users.where((e) {
+      return e.userName.toLowerCase().contains(name.toLowerCase()) ||
+          e.name.toLowerCase().contains(name.toLowerCase());
+    }).toList();
     notifyListeners();
   }
 }
