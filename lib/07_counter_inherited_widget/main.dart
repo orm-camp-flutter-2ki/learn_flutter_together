@@ -6,7 +6,14 @@ import 'package:learn_flutter_together/07_counter_inherited_widget/presentation/
 import 'package:learn_flutter_together/07_counter_inherited_widget/presentation/counter_view_model.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      value: CounterViewModel(
+        repository: CounterRepository(),
+      ),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -21,10 +28,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: ChangeNotifierProvider<CounterViewModel>(
-        value: CounterViewModel(repository: CounterRepository()),
-        child: const CounterScreen(),
-      ),
+      home: const CounterScreen(),
     );
   }
 }

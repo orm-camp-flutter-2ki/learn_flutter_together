@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_flutter_together/05_counter_mvvm/repository/counter_repository.dart';
 import 'package:learn_flutter_together/07_counter_inherited_widget/core/change_notifier_provider.dart';
 
 import 'counter_view_model.dart';
@@ -61,6 +62,17 @@ class _CounterScreenState extends State<CounterScreen> {
               onPressed: () => viewModel.x2(),
               child: const Text('X 2'),
             ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return const NextScreen();
+                  }),
+                );
+              },
+              child: const Text('Next Screen'),
+            ),
           ],
         ),
       ),
@@ -69,6 +81,29 @@ class _CounterScreenState extends State<CounterScreen> {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class NextScreen extends StatelessWidget {
+  const NextScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final viewModel =
+        ChangeNotifierProvider.of<CounterViewModel>(context).value;
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Next Screen',
+        ),
+      ),
+      body: Center(
+        child: Text(
+          '${viewModel.counter}',
+          style: const TextStyle(fontSize: 40),
+        ),
+      ),
     );
   }
 }
