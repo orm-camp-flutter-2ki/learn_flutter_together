@@ -4,9 +4,9 @@ import 'package:learn_flutter_together/00_common_data/repository/album_repositor
 import 'package:learn_flutter_together/04_album_photo/presentation/album_list/album_list_screen.dart';
 
 import '../../05_counter_mvvm/repository/counter_repository.dart';
-import '../core/change_notifier_provider.dart';
 import '../presentation/counter_screen.dart';
 import '../presentation/counter_view_model.dart';
+import 'package:provider/provider.dart';
 
 // GoRouter configuration
 final router = GoRouter(
@@ -15,7 +15,7 @@ final router = GoRouter(
       path: '/',
       builder: (context, state) {
         return ChangeNotifierProvider(
-          value: CounterViewModel(
+          create: (context) => CounterViewModel(
             repository: CounterRepository(),
           ),
           child: const CounterScreen(),
@@ -26,7 +26,7 @@ final router = GoRouter(
       path: '/next',
       builder: (context, state) {
         return ChangeNotifierProvider(
-          value: CounterViewModel(
+          create: (context) => CounterViewModel(
             repository: CounterRepository(),
           ),
           child: const NextScreen(),

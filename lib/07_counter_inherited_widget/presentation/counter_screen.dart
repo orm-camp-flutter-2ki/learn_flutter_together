@@ -1,44 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:learn_flutter_together/05_counter_mvvm/repository/counter_repository.dart';
-import 'package:learn_flutter_together/07_counter_inherited_widget/core/change_notifier_provider.dart';
+import 'package:provider/provider.dart';
 
 import 'counter_view_model.dart';
 
-class CounterScreen extends StatefulWidget {
+class CounterScreen extends StatelessWidget {
   const CounterScreen({super.key});
 
   @override
-  State<CounterScreen> createState() => _CounterScreenState();
-}
-
-class _CounterScreenState extends State<CounterScreen> {
-  CounterViewModel get viewModel =>
-      ChangeNotifierProvider.of<CounterViewModel>(context).value;
-
-  void updateUI() => setState(() {});
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    viewModel.addListener(updateUI);
-  }
-
-  @override
-  void dispose() {
-    viewModel.removeListener(updateUI);
-    super.dispose();
-  }
-
-  void _incrementCounter() {
-    viewModel.incrementCounter();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    print('build');
-    final viewModel =
-        ChangeNotifierProvider.of<CounterViewModel>(context).value;
+    // final viewModel = Provider.of<CounterViewModel>(context);
+    final viewModel = context.watch<CounterViewModel>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -71,7 +43,7 @@ class _CounterScreenState extends State<CounterScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () => viewModel.incrementCounter(),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
@@ -84,8 +56,8 @@ class NextScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel =
-        ChangeNotifierProvider.of<CounterViewModel>(context).value;
+    final viewModel = context.watch<CounterViewModel>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
