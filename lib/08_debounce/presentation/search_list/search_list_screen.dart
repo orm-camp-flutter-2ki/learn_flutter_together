@@ -4,21 +4,8 @@ import 'package:learn_flutter_together/08_debounce/presentation/search_list/comp
 import 'package:learn_flutter_together/08_debounce/presentation/search_list/search_list_view_model.dart';
 import 'package:provider/provider.dart';
 
-class SearchListScreen extends StatefulWidget {
+class SearchListScreen extends StatelessWidget {
   const SearchListScreen({super.key});
-
-  @override
-  State<SearchListScreen> createState() => _SearchListScreenState();
-}
-
-class _SearchListScreenState extends State<SearchListScreen> {
-  final _queryTextEditingController = TextEditingController();
-
-  @override
-  void dispose() {
-    _queryTextEditingController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,17 +19,12 @@ class _SearchListScreenState extends State<SearchListScreen> {
       body: Column(
         children: [
           TextField(
-            controller: _queryTextEditingController,
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(),
+            onChanged: (value) {
+              viewModel.onSearch(value);
+            },
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
               hintText: '검색어',
-              suffixIcon: IconButton(
-                icon: const Icon(Icons.search),
-                onPressed: () {
-                  final query = _queryTextEditingController.text;
-                  viewModel.onSearch(query);
-                },
-              ),
             ),
           ),
           Expanded(
