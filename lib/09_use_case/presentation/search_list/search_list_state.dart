@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../data/model/photo.dart';
+import '../../domain/model/photo.dart';
 
 part 'search_list_state.freezed.dart';
 

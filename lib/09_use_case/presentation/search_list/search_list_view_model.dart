@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import '../../data/repository/photo_repository.dart';
+import 'package:learn_flutter_together/09_use_case/domain/use_case/get_photos_use_case.dart';
+import '../../domain/repository/photo_repository.dart';
 import 'search_list_state.dart';
 
 class SearchListViewModel with ChangeNotifier {
-  final PhotoRepository _photoRepository;
+  final GetPhotosUseCase _getPhotosUseCase;
 
   SearchListViewModel({
-    required PhotoRepository photoRepository,
-  }) : _photoRepository = photoRepository;
+    required GetPhotosUseCase getPhotosUseCase,
+  }) : _getPhotosUseCase = getPhotosUseCase;
 
   SearchListState _state = const SearchListState();
 
@@ -18,7 +19,7 @@ class SearchListViewModel with ChangeNotifier {
     notifyListeners();
 
     _state = state.copyWith(
-      photos: await _photoRepository.getPhotos(query),
+      photos: await _getPhotosUseCase.execute(query),
       isLoading: false,
     );
     notifyListeners();

@@ -1,9 +1,9 @@
 
 import 'package:learn_flutter_together/09_use_case/data/data_source/photo_data_source.dart';
 import 'package:learn_flutter_together/09_use_case/data/mapper/photo_mapper.dart';
-import 'package:learn_flutter_together/09_use_case/data/repository/photo_repository.dart';
+import 'package:learn_flutter_together/09_use_case/domain/repository/photo_repository.dart';
 
-import '../model/photo.dart';
+import '../../domain/model/photo.dart';
 
 class PhotoRepositoryImpl implements PhotoRepository {
   final PhotoDataSource _photoDataSource;

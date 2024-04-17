@@ -1,5 +1,5 @@
 import '../dto/photo_result_dto.dart';
-import '../model/photo.dart';
+import '../../domain/model/photo.dart';
 
 extension ToPhoto on Hits {
   Photo toPhoto() {
