@@ -72,8 +72,16 @@ class _ImageSearchAppState extends State<ImageSearchApp> {
             child: FutureBuilder<List<Photo>>(
                 future: getPhotos(controller.text),
                 builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  final photos = snapshot.data!;
+
                   return ListView.builder(
-                    itemBuilder: (BuildContext context, int index) {},
+                    itemBuilder: (BuildContext context, int index) {
+                      final photo = photos[index];
+                      return Image.network(photo.imageUrl);
+                    },
                   );
                 }),
           ),
