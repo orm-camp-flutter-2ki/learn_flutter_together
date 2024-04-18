@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -37,9 +38,11 @@ class _ImageSearchAppState extends State<ImageSearchApp> {
   final _url =
       'https://pixabay.com/api/?key=10711147-dc41758b93b263957026bdadb&image_type=photo';
 
+  final dio = Dio();
+
   Future<List<Photo>> getPhotos(String query) async {
-    final response = await http.get(Uri.parse('$_url&q=$query'));
-    final List jsonList = jsonDecode(response.body)['hits'];
+    final response = await dio.get('$_url&q=$query');
+    final List jsonList = response.data['hits'];
     return jsonList.map((e) => Photo.fromJson(e)).toList();
   }
 
