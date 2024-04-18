@@ -20,7 +20,7 @@ class _FutureSetStateState extends State<FutureSetState> {
   @override
   void initState() {
     super.initState();
-    print('initState');
+    debugPrint('initState');
 
     setState(() {
       isLoading = true;
@@ -36,7 +36,7 @@ class _FutureSetStateState extends State<FutureSetState> {
   // 그림 그리는 부분
   @override
   Widget build(BuildContext context) {
-    print('build');
+    debugPrint('build');
     // 데이터 요청 절대 금지
     // todoRepository.getTodos().then((todos) {
     //   setState(() {

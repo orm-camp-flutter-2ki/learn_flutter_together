@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:learn_flutter_together/09_use_case/domain/use_case/get_photos_top3_use_case.dart';
+import 'package:learn_flutter_together/09_use_case/domain/use_case/get_photos_top5_use_case.dart';
 import 'package:learn_flutter_together/09_use_case/domain/use_case/get_photos_use_case.dart';
 import 'package:learn_flutter_together/09_use_case/presentation/search_list/search_list_screen.dart';
 import 'package:learn_flutter_together/09_use_case/presentation/search_list/search_list_view_model.dart';
@@ -24,15 +26,22 @@ class MyApp extends StatelessWidget {
       ),
       home: ChangeNotifierProvider(
         // cnp
-        create: (_) => SearchListViewModel(
-          getPhotosUseCase: GetPhotosUseCase(
-            PhotoRepositoryImpl(
-              photoDataSource: PhotoDataSource(),
+        create: (_) {
+          final repository = PhotoRepositoryImpl(
+            photoDataSource: PhotoDataSource(),
+          );
+
+          return SearchListViewModel(
+            getPhotosUseCase: GetPhotosUseCase(
+              getPhotosTop3UseCase: GetPhotosTop3UseCase(repository),
+              getPhotosTop5UseCase: GetPhotosTop5UseCase(repository),
             ),
-          ),
-        ),
+          );
+        },
         child: const SearchListScreen(),
       ),
     );
   }
 }
+
+

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:learn_flutter_together/00_common_data/model/photo.dart';
 import 'package:learn_flutter_together/00_common_data/repository/photo_repository.dart';
 import 'package:learn_flutter_together/04_album_photo/presentation/photo_detail/photo_detail_screen.dart';

@@ -1,12 +1,23 @@
+import 'package:learn_flutter_together/09_use_case/domain/use_case/get_photos_top3_use_case.dart';
+import 'package:learn_flutter_together/09_use_case/domain/use_case/get_photos_top5_use_case.dart';
+
 import '../model/photo.dart';
-import '../repository/photo_repository.dart';
 
 class GetPhotosUseCase {
-  final PhotoRepository _photoRepository;
+  final GetPhotosTop3UseCase _getPhotosTop3UseCase;
+  final GetPhotosTop5UseCase _getPhotosTop5UseCase;
 
-  GetPhotosUseCase(this._photoRepository);
+  const GetPhotosUseCase({
+    required GetPhotosTop3UseCase getPhotosTop3UseCase,
+    required GetPhotosTop5UseCase getPhotosTop5UseCase,
+  })  : _getPhotosTop3UseCase = getPhotosTop3UseCase,
+        _getPhotosTop5UseCase = getPhotosTop5UseCase;
 
   Future<List<Photo>> execute(String query) async {
-    return (await _photoRepository.getPhotos(query)).take(3).toList();
+    if (DateTime.now().minute.isEven) {
+      return _getPhotosTop3UseCase.execute(query);
+    } else {
+      return _getPhotosTop5UseCase.execute(query);
+    }
   }
 }

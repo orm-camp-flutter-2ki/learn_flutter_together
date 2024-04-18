@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learn_flutter_together/04_album_photo/router/router.dart';
 
-import 'presentation/album_list/album_list_screen.dart';
-
 void main() {
   runApp(const MyApp());
 }

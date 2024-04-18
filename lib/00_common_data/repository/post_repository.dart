@@ -1,6 +1,5 @@
 import '../data_source/json_place_holder_api.dart';
 import '../model/post.dart';
-import '../model/user.dart';
 
 abstract interface class PostRepository {
   Future<Post> getPost(int id);
