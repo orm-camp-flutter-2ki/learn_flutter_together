@@ -35,10 +35,10 @@ class ImageSearchApp extends StatefulWidget {
 
 class _ImageSearchAppState extends State<ImageSearchApp> {
   final _url =
-      'https://pixabay.com/api/?key=10711147-dc41758b93b263957026bdadb&q=yellow+flowers&image_type=photo';
+      'https://pixabay.com/api/?key=10711147-dc41758b93b263957026bdadb&image_type=photo';
 
   Future<List<Photo>> getPhotos(String query) async {
-    final response = await http.get(Uri.parse(_url));
+    final response = await http.get(Uri.parse('$_url&q=$query'));
     final List jsonList = jsonDecode(response.body)['hits'];
     return jsonList.map((e) => Photo.fromJson(e)).toList();
   }
@@ -78,6 +78,7 @@ class _ImageSearchAppState extends State<ImageSearchApp> {
                   final photos = snapshot.data!;
 
                   return ListView.builder(
+                    itemCount: photos.length,
                     itemBuilder: (BuildContext context, int index) {
                       final photo = photos[index];
                       return Image.network(photo.imageUrl);
