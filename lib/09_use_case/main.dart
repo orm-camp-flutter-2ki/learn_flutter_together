@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:learn_flutter_together/09_use_case/domain/use_case/get_photos_top3_use_case.dart';
-import 'package:learn_flutter_together/09_use_case/domain/use_case/get_photos_top5_use_case.dart';
-import 'package:learn_flutter_together/09_use_case/domain/use_case/get_photos_use_case.dart';
-import 'package:learn_flutter_together/09_use_case/presentation/search_list/search_list_screen.dart';
-import 'package:learn_flutter_together/09_use_case/presentation/search_list/search_list_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:learn_flutter_together/09_use_case/core/router.dart';
+import 'package:learn_flutter_together/09_use_case/di/di_setup.dart';
 
-import 'data/data_source/photo_data_source.dart';
-import 'data/repository/photo_repository_impl.dart';
-
-void main() {
+void main() async {
+  await diSetup();
   runApp(const MyApp());
 }
 
@@ -18,30 +12,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: ChangeNotifierProvider(
-        // cnp
-        create: (_) {
-          final repository = PhotoRepositoryImpl(
-            photoDataSource: PhotoDataSource(),
-          );
-
-          return SearchListViewModel(
-            getPhotosUseCase: GetPhotosUseCase(
-              getPhotosTop3UseCase: GetPhotosTop3UseCase(repository),
-              getPhotosTop5UseCase: GetPhotosTop5UseCase(repository),
-            ),
-          );
-        },
-        child: const SearchListScreen(),
-      ),
     );
   }
 }
-
-
