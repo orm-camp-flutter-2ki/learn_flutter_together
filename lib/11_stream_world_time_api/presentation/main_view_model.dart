@@ -10,22 +10,13 @@ class MainViewModel with ChangeNotifier {
 
   Time? _time;
 
-  StreamSubscription<Time>? _subscription;
+  Time? get time => _time;
 
-  Time get time =>
-      _time ??
-      Time(
-        timezone: 'null',
-        unixTime: 0,
-        utcDateTime: DateTime.now(),
-        utcOffset: 'null',
-      );
+  StreamSubscription<Time>? _subscription;
 
   MainViewModel({
     required FetchPeriodicTimeUseCase fetchPeriodicTimeUseCase,
-  }) : _fetchPeriodicTimeUseCase = fetchPeriodicTimeUseCase {
-    fetchTime();
-  }
+  }) : _fetchPeriodicTimeUseCase = fetchPeriodicTimeUseCase;
 
   void fetchTime() {
     _subscription = _fetchPeriodicTimeUseCase.execute().listen((time) {
