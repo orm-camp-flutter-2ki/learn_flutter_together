@@ -14,8 +14,8 @@ Future<void> diSetup() async {
   getIt.registerSingleton<PhotoDataSource>(PhotoDataSource());
   getIt.registerSingleton<PhotoRepository>(
       PhotoRepositoryImpl(photoDataSource: getIt()));
-  getIt.registerSingleton<GetPhotosTop3UseCase>(getIt());
-  getIt.registerSingleton<GetPhotosTop5UseCase>(getIt());
+  getIt.registerSingleton<GetPhotosTop3UseCase>(GetPhotosTop3UseCase(getIt()));
+  getIt.registerSingleton<GetPhotosTop5UseCase>(GetPhotosTop5UseCase(getIt()));
   getIt.registerSingleton<GetPhotosUseCase>(
     GetPhotosUseCase(
       getPhotosTop3UseCase: getIt(),
