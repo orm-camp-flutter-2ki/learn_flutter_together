@@ -1,10 +1,12 @@
 
+import 'package:injectable/injectable.dart';
 import 'package:learn_flutter_together/09_use_case/data/data_source/photo_data_source.dart';
 import 'package:learn_flutter_together/09_use_case/data/mapper/photo_mapper.dart';
 import 'package:learn_flutter_together/09_use_case/domain/repository/photo_repository.dart';
 
 import '../../domain/model/photo.dart';
 
+@Singleton(as: PhotoRepository)
 class PhotoRepositoryImpl implements PhotoRepository {
   final PhotoDataSource _photoDataSource;
 

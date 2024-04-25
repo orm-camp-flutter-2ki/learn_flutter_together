@@ -1,9 +1,11 @@
+import 'package:injectable/injectable.dart';
 import 'package:learn_flutter_together/09_use_case/core/result.dart';
 import 'package:learn_flutter_together/09_use_case/domain/use_case/get_photos_top3_use_case.dart';
 import 'package:learn_flutter_together/09_use_case/domain/use_case/get_photos_top5_use_case.dart';
 
 import '../model/photo.dart';
 
+@singleton
 class GetPhotosUseCase {
   final GetPhotosTop3UseCase _getPhotosTop3UseCase;
   final GetPhotosTop5UseCase _getPhotosTop5UseCase;

@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:injectable/injectable.dart';
 
 import '../dto/photo_result_dto.dart';
 
+@singleton
 class PhotoDataSource {
   final _baseUrl = 'https://pixabay.com/api/';
 

@@ -43,6 +43,7 @@ dependencies:
   dio: ^5.4.3+1
   get_it: ^7.7.0
   retrofit: ^4.1.0
+  injectable: ^2.4.1
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +59,7 @@ dev_dependencies:
   freezed: ^2.4.7
   json_serializable: ^6.7.1
   retrofit_generator: ^8.1.0
+  injectable_generator: ^2.6.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

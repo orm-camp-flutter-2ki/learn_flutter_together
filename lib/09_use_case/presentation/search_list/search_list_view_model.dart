@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:learn_flutter_together/09_use_case/core/result.dart';
 import 'package:learn_flutter_together/09_use_case/domain/model/photo.dart';
 import 'package:learn_flutter_together/09_use_case/domain/use_case/get_photos_use_case.dart';
@@ -8,10 +9,13 @@ import 'package:learn_flutter_together/09_use_case/presentation/search_list/sear
 
 import 'search_list_state.dart';
 
+@injectable
 class SearchListViewModel with ChangeNotifier {
   final GetPhotosUseCase _getPhotosUseCase;
 
   final _eventController = StreamController<SearchListEvent>();
+
+  final eventNotifier = ValueNotifier<SearchListEvent?>(null);
 
   Stream<SearchListEvent> get eventStream => _eventController.stream;
 

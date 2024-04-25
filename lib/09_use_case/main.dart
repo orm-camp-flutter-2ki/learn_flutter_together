@@ -3,7 +3,7 @@ import 'package:learn_flutter_together/09_use_case/core/router.dart';
 import 'package:learn_flutter_together/09_use_case/di/di_setup.dart';
 
 void main() async {
-  await diSetup();
+  configureDependencies();
   runApp(const MyApp());
 }
 
