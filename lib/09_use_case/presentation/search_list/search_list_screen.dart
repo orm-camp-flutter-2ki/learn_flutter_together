@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_flutter_together/09_use_case/di/di_setup.dart';
 import 'package:learn_flutter_together/09_use_case/presentation/search_list/search_list_event.dart';
 import 'package:learn_flutter_together/09_use_case/presentation/search_list/search_list_view_model.dart';
 import 'package:provider/provider.dart';
@@ -53,7 +54,7 @@ class _SearchListScreenState extends State<SearchListScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('이미지 검색 1'),
+        title: Text(getIt<String>()),
       ),
       body: Column(
         children: [
