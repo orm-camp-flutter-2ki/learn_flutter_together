@@ -23,7 +23,4 @@ Future<void> diSetup() async {
     ),
   );
 
-  getIt.registerFactory<SearchListViewModel>(
-    () => SearchListViewModel(getPhotosUseCase: getIt()),
-  );
 }
